@@ -12,8 +12,6 @@ services:
         POSTGRES_USER: dementedearplug
         POSTGRES_PASSWORD: incorrect
         POSTGRES_HOST: database
-    links:
-      - database
   #Adding postgress
   database:
     build: postgres
