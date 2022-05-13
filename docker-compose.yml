@@ -6,7 +6,7 @@ services:
       - "8080:8080"
     volumes:
     # Enables hot reload by mapping workdir to container workdir
-      - ./:/usr/src/smart-brain-api
+      - ./:/app/smart-brain-api
     environment:
         POSTGRES_DB: smart_brain_docker
         POSTGRES_USER: dementedearplug
@@ -24,4 +24,9 @@ services:
         POSTGRES_HOST: database
     ports:
       - "5432:5432"
+
+  web_app:
+    build: ../smart-brain/
+    ports:
+      - "3000:3000"
 
