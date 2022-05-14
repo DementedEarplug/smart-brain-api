@@ -1,6 +1,6 @@
 begin transaction;
 insert into users (name, email, entries, joined)
-values ('Puto', 'p@email.com',0,'2022-05-13 02:18:32.417');
+values ('Puto', 'jojo@email.com',0,'2022-05-13 02:18:32.417');
 commit;
 
 begin transaction;
