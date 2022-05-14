@@ -1,5 +1,9 @@
 const { logger, lineNumber } = require("../utils/logger");
 const jwt = require("jsonwebtoken");
+const redis = require('redis')
+
+//Set up redis
+const redisClient = redis.createClient({host: 'redis', port: 6379})
 
 const handleSignin = (db, bcrypt, req, res) => {
   logger.info(`[./${lineNumber(new Error())}] Handle signin.`);
@@ -39,6 +43,7 @@ const handleSignin = (db, bcrypt, req, res) => {
 };
 
 const getAuthTokenId = () => {
+
   console.log("auth ok!");
 };
 
@@ -46,6 +51,7 @@ const createSession = (user) => {
   logger.info(`[./${lineNumber(new Error())}] Create session`);
   const { email, id } = user;
   const token = signToken(email);
+  redisClient.set(`${email}`, token, redis.print)
   return { sucess: true, id, token };
 };
 
