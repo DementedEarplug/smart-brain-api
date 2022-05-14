@@ -32,12 +32,15 @@ app.get("/", (req, res) => {
   console.log(db.user)
   res.send(db.user);
 });
-app.post("/signin", signin.handleSignin(db, bcrypt));
+app.post("/signin", signin.signinAuthentication(db, bcrypt));
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
 });
 app.get("/profile/:id", (req, res) => {
   profile.handleProfileGet(req, res, db);
+});
+app.put("/profile/:id", (req, res) => {
+  profile.handleProfilePut(req, res, db);
 });
 app.put("/image", (req, res) => {
   image.handleImage(req, res, db);
