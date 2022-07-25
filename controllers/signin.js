@@ -63,6 +63,7 @@ const getAuthTokenId = (req, res) => {
       logger.error(`[./${lineNumber(new Error())}] ${err}`);
       return res.status(400).json('Unauthorized');
     } else {
+      logger.info(`[./${lineNumber(new Error())}] Already have a session!`)
       return res.json({id: reply });
     }
   });
@@ -102,7 +103,7 @@ const signinAuthentication = (db, bcrypt) => (req, res) => {
   logger.info(`[./${lineNumber(new Error())}] Initiated signin process`);
   const { authorization } = req.headers;
   return authorization
-    ? res.json(getAuthTokenId(req, res))
+    ? getAuthTokenId(req, res)
     : handleSignin(db, bcrypt, req, res)
         .then((user) => {
           user.id !== null && user.email !== null
